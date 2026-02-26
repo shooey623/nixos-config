@@ -20,6 +20,13 @@
     nixfmt
     krita
     gimp
+    (wrapOBS {
+      plugins = with obs-studio-plugins; [
+        obs-vaapi
+        obs-vkcapture
+        obs-pipewire-audio-capture
+      ];
+    })
     nerd-fonts.departure-mono
   ];
 
