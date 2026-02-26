@@ -37,7 +37,7 @@
   };
 
   programs.gamescope = {
-    eanble = true;
+    enable = true;
     capSysNice = true;
   };
 
@@ -46,11 +46,10 @@
     lutris
     heroic
     winetricks
-    wine64WowPackages.stable
-    Wine64WowPackages.staging
+    wineWow64Packages.stable
+    wineWow64Packages.staging
     vulkan-tools
-    glxinfo
-    proton
+    mesa-demos
     protontricks
   ];
 

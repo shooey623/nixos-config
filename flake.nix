@@ -43,10 +43,10 @@
         ./modules/gaming.nix
         ./modules/performance.nix
 
-        home-manager.nixosModues.home-manager
+        home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackagess = true;
+          home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "hm-backup";
           home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.sharedModules = [
@@ -57,7 +57,7 @@
         (
           { pkgs, ... }:
           {
-            nixpkgs.overplays = [
+            nixpkgs.overlays = [
               nix-cachyos-kernel.overlays.pinned
             ];
           }
@@ -73,7 +73,7 @@
             ./hosts/zephyrus/hardware-configuration.nix
             ./hosts/zephyrus/hardware.nix
             ./hosts/zephyrus/default.nix
-            { home-managers.users.sho = import ./home/sho.nix; }
+            { home-manager.users.sho = import ./home/sho.nix; }
           ];
         };
 

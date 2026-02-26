@@ -31,7 +31,7 @@
     wayland.enable = true;
   };
 
-  environment.systemPackagews = with pkgs; [
+  environment.systemPackages = with pkgs; [
     vim
     git
     wget
@@ -88,19 +88,19 @@
       ];
       emoji = [ "Noto Color Emoji" ];
     };
-
-    i18n.inputMethod = {
-      enable = true;
-      type = "fcitx5";
-      fcitx5 = {
-        addons = with pkgs; [
-          fcitx5-hangul
-          fcitx5-mozc
-          fcitx5-gtk
-          kdePackages.fcitx5-qt
-        ];
-        waylandFrontend = true;
-      };
-    };
   };
-}
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      addons = with pkgs; [
+        fcitx5-hangul
+        fcitx5-mozc
+        fcitx5-gtk
+        kdePackages.fcitx5-qt
+      ];
+      waylandFrontend = true;
+    };
+  }; 
+ }

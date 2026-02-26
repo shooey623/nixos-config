@@ -15,7 +15,7 @@
 
   boot.blacklistedKernelModules = [ "sp5100_tco" ];
 
-  boot.kernel.systcl = {
+  boot.kernel.sysctl = {
     "vm.swappiness" = 10;
     "vm.compaction_proactiveness" = 0;
     "vm.page_cluster" = 0;
