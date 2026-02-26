@@ -54,14 +54,14 @@
           ];
         }
 
-        # (
-        #  { pkgs, ... }:
-        # {
-        #  nixpkgs.overlays = [
-        #   nix-cachyos-kernel.overlays.pinned
-        # ];
-        # }
-        # )
+        (
+          { pkgs, ... }:
+          {
+            nixpkgs.overlays = [
+              nix-cachyos-kernel.overlays.pinned
+            ];
+          }
+        )
       ];
     in
     {
