@@ -26,11 +26,11 @@
     ACTION=="add|change", KERNEL=="nvme[0-9]*", ATTR{queue/scheduler}="none"
   '';
 
-  services.ananicy = {
-    enable = true;
-    package = pkgs.ananicy-cpp;
-    rulesProvider = pkgs.ananicy-rules-cachyos;
-  };
+ # services.ananicy = {
+  #  enable = true;
+  #  package = pkgs.ananicy-cpp;
+  #  rulesProvider = pkgs.ananicy-rules-cachyos;
+ # };
 
   environment.variables = {
     __GL_SHADER_DISK_CAHCE = "1";
