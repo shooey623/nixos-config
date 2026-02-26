@@ -18,7 +18,6 @@
     wezterm
     nil
     nixfmt
-    krita
     gimp
     (wrapOBS {
       plugins = with obs-studio-plugins; [
