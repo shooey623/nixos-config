@@ -84,7 +84,7 @@
             ./hosts/zooey/hardware-configuration.nix
             ./hosts/zooey/hardware.nix
             ./hosts/zooey/default.nix
-            { home-manager.uers.zoey = import ./home/zoey.nix; }
+            { home-manager.users.zoey = import ./home/zoey.nix; }
           ];
         };
       };
