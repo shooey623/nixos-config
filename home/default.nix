@@ -69,7 +69,6 @@
     gowall
     
     vesktop
-    spotify
     firefox
     
     gruvbox-plus-icons
@@ -327,4 +326,33 @@
     		font_size=20
     		background_alpha=0.3
   '';
+
+  programs.spicetify = let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  in {
+    enable = true;
+    theme = spicePkgs.themes.text;
+    customColorScheme = {
+      text = "ebdbb2";
+      subtext = "a89984";
+      main = "282828";
+      sidebar = "1d2021";
+      player = "32302f";
+      card = "3c3836";
+      shadow = "1d2021";
+      selected-row = "504945";
+      button = "fabd2f";
+      button-active = "d79921";
+      button-disabled = "665c54";
+      notification = "98971a";
+      notification-error = "cc241d";
+      misc = "689d6a";
+      tab-active = "fabd2f";
+      playback-bar = "fabd2f";
+    };
+    enabledExtensions = with spicePkgs.extensions; [
+      adblockify
+      shuffle
+    ];
+  };
 }

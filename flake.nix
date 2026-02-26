@@ -19,6 +19,11 @@
       url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -47,6 +52,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.sharedModules = [ inputs.spicetify-nix.homeManagerModules.spicetify ];
             home-manager.users.sho = import ./home/default.nix;
             home-manager.backupFileExtension = "bak";
           }
