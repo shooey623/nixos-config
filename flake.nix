@@ -1,10 +1,9 @@
 {
-  description = "Sho's NixOS - Zephyrus G14 2024";
+  description = "Shoo & Zooey's NixOS";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware.url = "github:/NixOS/nixos-hardware/master";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -34,38 +33,60 @@
       home-manager,
       nix-cachyos-kernel,
       nix-gaming,
+      spicetify-nix,
       ...
     }@inputs:
-    {
-      nixosConfigurations.zephyrus = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hardware-configuration.nix
-          ./hosts/zephyrus/hardware.nix
+    let
+      system = "x86_64-linux";
+      commonModules = [
+        ./modules/common.nix
+        ./modules/gaming.nix
+        ./modules/performance.nix
 
-          ./hosts/zephyrus/default.nix
-          ./hosts/zephyrus/gaming.nix
+        home-manager.nixosModues.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackagess = true;
+          home-manager.backupFileExtension = "hm-backup";
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.sharedModules = [
+            inputs.spicetify-nix.homeManagerModules.spicetify
+          ];
+        }
 
-          home-manager.nixosModules.home-manager
+        (
+          { pkgs, ... }:
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.sharedModules = [ inputs.spicetify-nix.homeManagerModules.spicetify ];
-            home-manager.users.sho = import ./home/default.nix;
-            home-manager.backupFileExtension = "bak";
+            nixpkgs.overplays = [
+              nix-cachyos-kernel.overlays.pinned
+            ];
           }
+        )
+      ];
+    in
+    {
+      nixosConfigurations = {
+        zephyrus = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = commonModules ++ [
+            ./hosts/zephyrus/hardware-configuration.nix
+            ./hosts/zephyrus/hardware.nix
+            ./hosts/zephyrus/default.nix
+            { home-managers.users.sho = import ./home/sho.nix; }
+          ];
+        };
 
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = [
-                nix-cachyos-kernel.overlays.pinned
-              ];
-            }
-          )
-        ];
+        zooey = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = commonModules ++ [
+            ./hosts/zooey/hardware-configuration.nix
+            ./hosts/zooey/hardware.nix
+            ./hosts/zooey/default.nix
+            { home-manager.uers.zoey = import ./home/zoey.nix; }
+          ];
+        };
       };
     };
 }
