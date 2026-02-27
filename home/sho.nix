@@ -38,6 +38,7 @@
     ticktick
     obsidian
     moonlight-qt
+    solaar
   ];
 
   home.file.".local/share/fonts/MonoLisa" = {
