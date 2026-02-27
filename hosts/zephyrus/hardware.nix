@@ -39,7 +39,7 @@
       nvidiaBusId = "PCI:1:0:0";
     };
   };
-
+  
   systemd.services.nvidia-suspend.wantedBy = lib.mkForce [
     "systemd-suspend.service"
     "systemd-suspend-then-hibernate.service"
@@ -68,6 +68,9 @@
     interval = "monthly";
     fileSystems = [ "/" ];
   };
+
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
 
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
