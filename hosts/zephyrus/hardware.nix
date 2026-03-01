@@ -57,7 +57,6 @@
 
   services.asusd = {
     enable = true;
-    enableUserService = true;
   };
   services.supergfxd.enable = true;
   services.power-profiles-daemon.enable = true;
@@ -74,6 +73,8 @@
 
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
+  networking.networkmanager.wifi.backend = "iwd";
+  
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 }
