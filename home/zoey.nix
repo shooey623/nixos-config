@@ -19,6 +19,7 @@
     nil
     nixfmt
     gimp
+    openrgb-with-all-plugins
     (wrapOBS {
       plugins = with obs-studio-plugins; [
         obs-vaapi
